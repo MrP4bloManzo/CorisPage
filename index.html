@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cori's P&K - Tu estilo, nuestra visión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado con logo y texto -->
+    <header>
+        <div class="header-content">
+            <img src="Logo principal.jpg" alt="Logo Cori's P&K" class="logo" />
+            <div class="brand-text">
+                <h1>Cori's P&K</h1>
+                <p>Tu estilo, nuestra visión</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Panel de navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#personaliza">Personaliza</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Bienvenido a Cori's Store</h2>
+            <p>Diseños únicos y personalizados para gente única como tú. Explora nuestra colección y deja que tu ropa hable por ti.</p>
+            <a href="#catalogo" class="cta-button">Explorar Catálogo</a>
+        </div>
+    </section>
+
+    <!-- Sección CATÁLOGO -->
+    <section id="catalogo" class="fade-in">
+        <h2>Catálogo</h2>
+        <p>Explora nuestras colecciones exclusivas diseñadas con pasión y creatividad.</p>
+        <div class="catalog-grid">
+            <!-- Camiseta  -->
+            <div class="catalog-card">
+                <img src="/Public/img/Camisa1.png" alt="Camiseta personalizada para el Gym 💪" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-image" style="display: none;">
+                    <span>Imagen próximamente</span>
+                </div>
+                <div class="catalog-card-content">
+                    <h3>Camiseta personalizada para el Gym 💪</h3>
+                    <p>Diseños únicos en algodón premium. Perfectas para expresar tu personalidad.</p>
+                </div>
+            </div>
+            <!-- Croptop -->
+            <div class="catalog-card">
+                <img src="/Public/img/Croptop1.png" alt="Crop top personalizado" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-image" style="display: none;">
+                    <span>Imagen próximamente</span>
+                </div>
+                <div class="catalog-card-content">
+                    <h3>Crop Tops</h3>
+                    <p>Estilo juvenil y moderno. Ideales para cualquier ocasión casual.</p>
+                </div>
+            </div>
+            <!-- ToteBag -->
+            <div class="catalog-card">
+                <img src="/Public/img/Tote1.png" alt="Tote bag personalizada" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="placeholder-image" style="display: none;">
+                    <span>Imagen próximamente</span>
+                </div>
+                <div class="catalog-card-content">
+                    <h3>Tote Bags</h3>
+                    <p>Bolsas ecológicas con diseños exclusivos. Funcionales y con estilo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección PERSONALIZA -->
+    <section id="personaliza" class="fade-in">
+        <h2>Personaliza tu prenda</h2>
+        <p>¿Tienes un diseño en mente? Nosotros lo hacemos realidad. Elige corte, color y diseño para crear algo completamente único.</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="#contacto" class="cta-button">Comenzar Personalización</a>
+        </div>
+    </section>
+
+    <!-- Sección NOSOTROS -->
+    <section id="nosotros" class="fade-in">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos una marca joven enfocada en moda personalizada y accesible. Diseñamos con pasión para personas auténticas que buscan expresar su individualidad a través de la ropa. Cada prenda cuenta una historia, y queremos que esa historia sea tuya.</p>
+    </section>
+
+    <!-- Sección CONTACTO -->
+    <section id="contacto" class="fade-in">
+        <h2>Contacto</h2>
+        <p>¿Listo para crear algo increíble? Contáctanos a través de nuestras redes sociales o llena el formulario.</p>
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu idea..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input id="telefono" name="telefono" required placeholder="Ej. 312-123-4567" >
+                </div>
+
+                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>© 2025 Cori's P&K | Todos los derechos reservados | Diseñado con 💜 para gente única</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling para navegación
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animación fade-in al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Efecto de typing para el hero
+        const heroTitle = document.querySelector('.hero h2');
+        if (heroTitle) {
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
+            
+            setTimeout(() => {
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                typeWriter();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
