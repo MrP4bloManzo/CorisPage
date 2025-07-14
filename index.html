@@ -7,7 +7,582 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-color: #00f0ff;
+            --secondary-color: #7f5af0;
+            --accent-color: #8a2be2;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #111;
+            --text-light: #e0f7fa;
+            --text-muted: #ccc;
+            --text-dark: #777;
+            --gradient-primary: linear-gradient(135deg, #00f0ff 0%, #7f5af0 100%);
+            --gradient-secondary: linear-gradient(135deg, #7f5af0 0%, #8a2be2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.6); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Header mejorado */
+        header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff" opacity="0.03"><polygon points="0,100 100,0 200,100 300,0 400,100 500,0 600,100 700,0 800,100 900,0 1000,100 1000,100 0,100"/></svg>') repeat-x;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            max-width: 120px;
+            height: auto;
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .brand-text {
+            text-align: left;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .brand-text h1 {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .brand-text p {
+            color: var(--secondary-color);
+            font-size: 1.2em;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Navegación mejorada */
+        nav {
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
+        nav a:hover {
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 50%, var(--bg-dark) 100%);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3.5em;
+            font-weight: 700;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.9s both;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Secciones mejoradas */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: rgba(17, 17, 17, 0.5);
+            border-radius: 20px;
+            margin: 40px auto;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        section p {
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        /* Cards para catálogo */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .catalog-card {
+            background: rgba(17, 17, 17, 0.8);
+            border-radius: 15px;
+            padding: 0;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .catalog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .catalog-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .catalog-card:hover .catalog-card-image {
+            transform: scale(1.05);
+        }
+
+        .catalog-card-content {
+            padding: 30px;
+        }
+
+        .catalog-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .catalog-card p {
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .catalog-card.no-image {
+            padding: 30px;
+        }
+
+        .catalog-card.no-image .catalog-card-content {
+            padding: 0;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(127, 90, 240, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.1em;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        /* Formulario mejorado */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(17, 17, 17, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(127, 90, 240, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(0, 240, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-light);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
+        }
+
+        /* Redes sociales */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            text-decoration: none;
+            color: var(--bg-dark);
+            font-size: 1.5em;
+            line-height: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            animation: none;
+        }
+
+        /* Mensaje de éxito */
+        .success-message {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Footer mejorado */
+        footer {
+            background: var(--bg-darker);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .catalog-card-content .price {
+    color: var(--accent-color);
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.apartar-btn {
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.apartar-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
+}
+.catalog-card-content .talla {
+    font-size: 0.95em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 500;
+    background: rgba(0, 240, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+}
+
+.catalog-card-content .talla:hover {
+    transform: scale(1.05);
+    background: rgba(0, 240, 255, 0.08);
+}
+
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .brand-text h1 {
+                font-size: 2.5em;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Efectos adicionales */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <!-- Encabezado con logo y texto -->
@@ -40,45 +615,167 @@
     </section>
 
     <!-- Sección CATÁLOGO -->
-    <section id="catalogo" class="fade-in">
-        <h2>Catálogo</h2>
-        <p>Explora nuestras colecciones exclusivas diseñadas con pasión y creatividad.</p>
-        <div class="catalog-grid">
-            <!-- Camiseta  -->
-            <div class="catalog-card">
-                <img src="Camisa1.png" alt="Camiseta personalizada para el Gym 💪" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="placeholder-image" style="display: none;">
-                    <span>Imagen próximamente</span>
-                </div>
-                <div class="catalog-card-content">
-                    <h3>Camiseta personalizada para el Gym 💪</h3>
-                    <p>Diseños únicos en algodón premium. Perfectas para expresar tu personalidad.</p>
-                </div>
-            </div>
-            <!-- Croptop -->
-            <div class="catalog-card">
-                <img src="Croptop1.png" alt="Crop top personalizado" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="placeholder-image" style="display: none;">
-                    <span>Imagen próximamente</span>
-                </div>
-                <div class="catalog-card-content">
-                    <h3>Crop Tops</h3>
-                    <p>Estilo juvenil y moderno. Ideales para cualquier ocasión casual.</p>
-                </div>
-            </div>
-            <!-- ToteBag -->
-            <div class="catalog-card">
-                <img src="Tote1.png" alt="Tote bag personalizada" class="catalog-card-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="placeholder-image" style="display: none;">
-                    <span>Imagen próximamente</span>
-                </div>
-                <div class="catalog-card-content">
-                    <h3>Tote Bags</h3>
-                    <p>Bolsas ecológicas con diseños exclusivos. Funcionales y con estilo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="catalogo" class="fade-in">
+  <h2>Catálogo</h2>
+  <p>Explora nuestras colecciones exclusivas diseñadas con pasión y creatividad.</p>
+  <div class="catalog-grid">
+
+    <!-- Camiseta 1 -->
+    <div class="catalog-card">
+      <img src="Camisa1.png" alt="Camiseta motivacional para Gym" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>🏋️‍♂️Camiseta de Calacas Chidas 💪</h3>
+        <p>Diseñada para quienes rompen límites en el gimnasio. Estilo y confort en cada entrenamiento.</p><br>
+        <p class="talla">
+            <span>🧵 Talla:</span> S &nbsp;
+        </p>
+        <p class="price">$250 MXN</p> 
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- Camiseta 2 -->
+    <div class="catalog-card">
+      <img src="Camisa2.png" alt="Camiseta edición limitada gym" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Edición Balenciaga 😎🤍</h3>
+        <p>Estampado Duradero y el mejor estilo para ti. Hecha para destacar.</p><br>
+        <p class="talla">
+            <span>🧵 Talla:</span> G &nbsp;
+        </p>
+        <p class="price">$250 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- Camiseta 3 -->
+    <div class="catalog-card">
+      <img src="Camisa3.png" alt="Camiseta estilo urbano" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Camisa Porshe🔥</h3>
+        <p>Perfecta para combinar con tus jeans favoritos. Ligera, fresca y con actitud.</p><br>
+        <p class="talla">
+            <span>🧵 Talla:</span> M &nbsp;
+        </p>
+        <p class="price">$250 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- Camiseta 4 -->
+    <div class="catalog-card">
+      <img src="Camisa4.png" alt="Camiseta diseño minimal" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>🔥 Camisa Junior H – Edición Streetwear 🔥</h3>
+        <p>Auténtica como su música, directa desde la calle a tu clóset.</p><br>
+        <p class="talla">
+            <span>🧵 Talla:</span> M &nbsp;
+        </p>
+        <p class="price">$250 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- CropTop 1 -->
+    <div class="catalog-card">
+      <img src="Croptop1.png" alt="Crop top vibes" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Crop Vibes - Sabrina 🌸</h3>
+        <p>Súper cómodo, con corte moderno. Ideal para climas cálidos y buen estilo.</p> <br>
+        <p class="talla">
+            <span>🧵 Talla:</span> S &nbsp;
+        </p>
+        <p class="price">$280 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- CropTop 2 -->
+    <div class="catalog-card">
+      <img src="Croptop2.png" alt="Crop top love" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Crop Top Love - My cherries and wine, rosemary and thyme💖</h3> <br>
+        <p>Un mensaje positivo y diseño cute para cualquier mood.</p>
+        <p class="talla">
+            <span>🧵 Talla:</span> M &nbsp;
+        </p>
+        <p class="price">$280 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- CropTop 3 -->
+    <div class="catalog-card">
+      <img src="Croptop3.png" alt="Crop rebel" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>🏁 Camisa Max Verstappen – Edición Fórmula 1 🏁</h3>
+        <p>Para los fanáticos de la velocidad y la adrenalina, lleva la pasión de las pistas a tu estilo diario. </p> <br>
+        <p class="talla">
+            <span>🧵 Talla:</span> M &nbsp;
+        </p>
+        <p class="price">$280 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- ToteBag 1 -->
+    <div class="catalog-card">
+      <img src="Tote1.png" alt="Tote bag ecológica" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Tote Eco - Good Vibes Only 🌿</h3>
+        <p>Bolsa ecológica con diseño aesthetic. Reutilizable y con onda.</p><br>
+        <p class="price">$170 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- ToteBag 2 -->
+    <div class="catalog-card">
+      <img src="Tote2.png" alt="Tote bag ilustrada" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Tote mistica, resistente y única 🖌️</h3>
+        <p>Tote bag con arte exclusivo de Cori’s. Hecha para destacar.</p><br>
+        <p class="price">$170 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- ToteBag 3 -->
+    <div class="catalog-card">
+      <img src="Tote3.png" alt="Tote bag personalizada" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Tote Summer 🌊</h3>
+        <p>Ideal para ir a playa con todo el estilo.</p><br>
+        <p class="price">$170 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+    <!-- ToteBag 4 -->
+    <div class="catalog-card">
+      <img src="Tote4.png" alt="Tote edición limitada" class="catalog-card-image">
+      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
+      <div class="catalog-card-content">
+        <h3>Tote Limited Edition 🍄</h3>
+        <p>Diseño único en existencia limitada. ¡No te quedes sin la tuya!</p>br
+        <p class="price">$170 MXN</p>
+        <button class="apartar-btn">Apartar</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- Sección PERSONALIZA -->
     <section id="personaliza" class="fade-in">
@@ -99,8 +796,19 @@
     <section id="contacto" class="fade-in">
         <h2>Contacto</h2>
         <p>¿Listo para crear algo increíble? Contáctanos a través de nuestras redes sociales o llena el formulario.</p>
+        
+        <div class="social-links">
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="TikTok">🎵</a>
+            <a href="#" title="WhatsApp">💬</a>
+        </div>
+        
         <div class="form-container">
-            <form>
+            <div class="success-message" id="successMessage">
+                ¡Mensaje enviado exitosamente! Te contactaremos pronto.
+            </div>
+            <form id="contactForm">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -110,14 +818,22 @@
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
+                    <label for="telefono">Teléfono (opcional)</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label for="tipo">Tipo de consulta</label>
+                    <select id="tipo" name="tipo" style="width: 100%; padding: 15px; border: 2px solid rgba(0, 240, 255, 0.2); border-radius: 10px; background: rgba(0, 0, 0, 0.5); color: var(--text-light); font-size: 1em;">
+                        <option value="personalizacion">Personalización</option>
+                        <option value="catalogo">Consulta de catálogo</option>
+                        <option value="precios">Precios</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="mensaje">Mensaje</label>
                     <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu idea..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input id="telefono" name="telefono" required placeholder="Ej. 312-123-4567" >
-                </div>
-
                 <button type="submit" class="submit-btn">Enviar Mensaje</button>
             </form>
         </div>
@@ -127,6 +843,9 @@
     <footer>
         <p>© 2025 Cori's P&K | Todos los derechos reservados | Diseñado con 💜 para gente única</p>
     </footer>
+
+    <!-- Botón scroll to top -->
+    <button class="scroll-top" id="scrollTop">↑</button>
 
     <script>
         // Smooth scrolling para navegación
@@ -175,6 +894,444 @@
                 typeWriter();
             }, 1000);
         }
+
+        // Manejo del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mostrar mensaje de éxito
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            
+            // Limpiar formulario
+            this.reset();
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // Botón scroll to top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Efecto parallax ligero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Agregar interactividad a las cards del catálogo
+        document.querySelectorAll('.catalog-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Efecto de cursor personalizado
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        cursor.style.cssText = `
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            opacity: 0;
+        `;
+        document.body.appendChild(cursor);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            cursor.style.opacity = '0.7';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '0.7';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+        });
+
+        // Efecto de partículas en el hero
+        function createParticles() {
+            const hero = document.querySelector('.hero');
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+            `;
+            hero.appendChild(particlesContainer);
+
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: var(--primary-color);
+                    border-radius: 50%;
+                    opacity: 0.3;
+                    animation: float ${Math.random() * 6 + 4}s ease-in-out infinite;
+                `;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Ejecutar después de que la página se cargue
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+
+        // Contador animado para estadísticas (opcional)
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                element.textContent = Math.floor(start);
+                
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        // Lazy loading para imágenes
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Función para cambiar el tema (modo oscuro/claro)
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+            
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = body.classList.contains('light-theme') ? '🌙' : '☀️';
+            }
+        }
+
+        // Validación avanzada del formulario
+        const formInputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldType = field.type;
+            let isValid = true;
+            let errorMessage = '';
+
+            // Remover mensajes de error anteriores
+            const existingError = field.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            if (field.hasAttribute('required') && value === '') {
+                isValid = false;
+                errorMessage = 'Este campo es obligatorio';
+            } else if (fieldType === 'email' && value !== '' && !isValidEmail(value)) {
+                isValid = false;
+                errorMessage = 'Por favor ingresa un email válido';
+            } else if (fieldType === 'tel' && value !== '' && !isValidPhone(value)) {
+                isValid = false;
+                errorMessage = 'Por favor ingresa un teléfono válido';
+            }
+
+            if (!isValid) {
+                field.classList.add('error');
+                field.style.borderColor = '#ff4444';
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.cssText = `
+                    color: #ff4444;
+                    font-size: 0.9em;
+                    margin-top: 5px;
+                `;
+                field.parentNode.appendChild(errorDiv);
+            } else {
+                field.classList.remove('error');
+                field.style.borderColor = 'rgba(0, 240, 255, 0.2)';
+            }
+
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Efecto de escritura automática para diferentes textos
+        const texts = [
+            "Bienvenido a Cori's Store",
+            "Tu estilo, nuestra pasión",
+            "Diseños únicos para ti",
+            "Expresa tu personalidad"
+        ];
+        
+        let currentTextIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            const heroTitle = document.querySelector('.hero h2');
+            if (!heroTitle) return;
+            
+            const currentText = texts[currentTextIndex];
+            
+            if (isDeleting) {
+                heroTitle.textContent = currentText.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+            } else {
+                heroTitle.textContent = currentText.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+            }
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && currentCharIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentTextIndex = (currentTextIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Iniciar el efecto de escritura después de 2 segundos
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero h2');
+            if (heroTitle) {
+                heroTitle.textContent = '';
+                typeWriter();
+            }
+        }, 2000);
+
+        // Función para mostrar notificaciones
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? 'var(--primary-color)' : '#ff4444'};
+                color: var(--bg-dark);
+                border-radius: 10px;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Actualizar el manejo del formulario para usar notificaciones
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validar todos los campos
+            const formInputs = this.querySelectorAll('input[required], textarea[required]');
+            let isFormValid = true;
+            
+            formInputs.forEach(input => {
+                if (!validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+            
+            if (!isFormValid) {
+                showNotification('Por favor corrige los errores en el formulario', 'error');
+                return;
+            }
+            
+            // Simular envío del formulario
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Efecto de reveal en scroll
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.catalog-card, .form-container');
+            
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Preloader
+        function showPreloader() {
+            const preloader = document.createElement('div');
+            preloader.id = 'preloader';
+            preloader.innerHTML = `
+                <div class="preloader-content">
+                    <div class="spinner"></div>
+                    <p>Cargando Cori's Store...</p>
+                </div>
+            `;
+            preloader.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--bg-dark);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                transition: opacity 0.5s ease;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .preloader-content {
+                    text-align: center;
+                    color: var(--text-light);
+                }
+                
+                .spinner {
+                    width: 50px;
+                    height: 50px;
+                    border: 3px solid rgba(0, 240, 255, 0.1);
+                    border-top: 3px solid var(--primary-color);
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    margin: 0 auto 20px;
+                }
+                
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            
+            document.head.appendChild(style);
+            document.body.appendChild(preloader);
+            
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.remove();
+                    }, 500);
+                }, 1000);
+            });
+        }
+
+        // Mostrar preloader solo en la primera carga
+        if (document.readyState === 'loading') {
+            showPreloader();
+        }
+
+        console.log('🎨 Cori\'s P&K - Sitio web cargado exitosamente!');
     </script>
 </body>
 </html>
