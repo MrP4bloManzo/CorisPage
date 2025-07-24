@@ -20,6 +20,30 @@
             --gradient-primary: linear-gradient(135deg, #00f0ff 0%, #7f5af0 100%);
             --gradient-secondary: linear-gradient(135deg, #7f5af0 0%, #8a2be2 100%);
         }
+        /* Estilos existentes... */
+        .whatsapp-success {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid #25D366;
+            color: #25D366;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .whatsapp-icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
 
         * {
             margin: 0;
@@ -1342,8 +1366,179 @@
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             // Abrir enlace en nueva pestaña
             window.open(whatsappUrl, '_blank');
+            // Función para enviar formulario a WhatsApp
+        function enviarFormularioWhatsApp(event) {
+            event.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const tipo = document.getElementById('tipo').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            // Validar campos requeridos
+            if (!nombre || !email || !mensaje) {
+                showNotification('Por favor completa los campos obligatorios', 'error');
+                return;
+            }
+            
+            // Validar email
+            if (!isValidEmail(email)) {
+                showNotification('Por favor ingresa un email válido', 'error');
+                return;
+            }
+            
+            // Construir mensaje para WhatsApp
+            let whatsappMessage = `¡Hola! Recibí una nueva consulta a través del formulario:\n\n`;
+            whatsappMessage += `*Nombre:* ${nombre}\n`;
+            whatsappMessage += `*Email:* ${email}\n`;
+            if (telefono) {
+                whatsappMessage += `*Teléfono:* ${telefono}\n`;
+            }
+            whatsappMessage += `*Tipo de consulta:* ${tipo}\n`;
+            whatsappMessage += `*Mensaje:*\n${mensaje}`;
+            
+            // Codificar el mensaje
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Número de WhatsApp (reemplaza con el número real)
+            const phoneNumber = "523123261757"; // Ejemplo: número con código de país
+            
+            // Crear enlace de WhatsApp
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Abrir enlace en nueva pestaña
+            window.open(whatsappUrl, '_blank');
+            
+            // Mostrar mensaje de éxito
+            document.getElementById('whatsappSuccess').style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                document.getElementById('whatsappSuccess').style.display = 'none';
+            }, 5000);
+            
+            // Limpiar formulario
+            document.getElementById('contactForm').reset();
         }
-
+        
+        // Función para comprar un producto
+        function comprarProducto(button) {
+            // Obtener los detalles del producto
+            const card = button.closest('.catalog-card');
+            const productName = card.querySelector('h3').innerText;
+            const price = card.querySelector('.price').innerText;
+            const sizeElement = card.querySelector('.talla');
+            const size = sizeElement ? sizeElement.innerText : 'Talla única';
+            const image = card.querySelector('.catalog-card-image').src;
+            
+            // Crear mensaje con formato
+            const message = `¡Hola! Estoy interesado en comprar este producto:\n\n*${productName}*\n\n${price}\n${size}\n\nAquí está la imagen de referencia:\n${image}`;
+            
+            // Codificar el mensaje para URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Número de WhatsApp
+            const phoneNumber = "523123261757";
+            
+            // Crear enlace de WhatsApp
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Abrir enlace en nueva pestaña
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Función para validar email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Función para mostrar notificaciones
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? 'var(--primary-color)' : '#ff4444'};
+                color: var(--bg-dark);
+                border-radius: 10px;
+                font-weight: 500;
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // Asignar evento al formulario
+        document.getElementById('contactForm').addEventListener('submit', enviarFormularioWhatsApp);
+        
+        // Resto del código existente...
+        // Smooth scrolling para navegación
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animación fade-in al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Botón scroll to top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        }
     </script>
 </body>
 </html>
