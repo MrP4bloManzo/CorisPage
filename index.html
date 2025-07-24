@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Cori's P&K - Ropa personalizada y diseños únicos. Camisetas, crop tops y tote bags con estilo exclusivo.">
+    <meta name="keywords" content="ropa personalizada, camisetas, crop tops, tote bags, diseño único, moda">
+    <meta property="og:title" content="Cori's P&K - Tu estilo, nuestra visión">
+    <meta property="og:description" content="Diseños únicos y personalizados para gente única como tú.">
+    <meta property="og:type" content="website">
     <title>Cori's P&K - Tu estilo, nuestra visión</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,30 +24,6 @@
             --text-dark: #777;
             --gradient-primary: linear-gradient(135deg, #00f0ff 0%, #7f5af0 100%);
             --gradient-secondary: linear-gradient(135deg, #7f5af0 0%, #8a2be2 100%);
-        }
-        /* Estilos existentes... */
-        .whatsapp-success {
-            background: rgba(37, 211, 102, 0.1);
-            border: 1px solid #25D366;
-            color: #25D366;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: none;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .whatsapp-icon {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
-            font-size: 1.2em;
         }
 
         * {
@@ -84,6 +65,11 @@
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
         }
 
         /* Header mejorado */
@@ -128,6 +114,20 @@
             transform: scale(1.1);
         }
 
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+            font-weight: bold;
+            font-size: 1.2em;
+            animation: glow 3s ease-in-out infinite;
+        }
+
         .brand-text {
             text-align: left;
             animation: fadeInUp 1s ease-out;
@@ -152,21 +152,39 @@
             letter-spacing: 1px;
         }
 
-        /* Navegación mejorada */
+        /* Navegación mejorada con menú hamburguesa */
         nav {
             background: rgba(17, 17, 17, 0.95);
             backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        nav a {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 20px 0;
+            list-style: none;
+            margin: 0;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
@@ -177,9 +195,10 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: block;
         }
 
-        nav a::before {
+        .nav-menu a::before {
             content: '';
             position: absolute;
             top: 0;
@@ -193,13 +212,42 @@
             z-index: -1;
         }
 
-        nav a:hover::before {
+        .nav-menu a:hover::before {
             opacity: 1;
         }
 
-        nav a:hover {
+        .nav-menu a:hover {
             color: var(--bg-dark);
             transform: translateY(-3px);
+        }
+
+        /* Menú hamburguesa */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
         /* Hero Section */
@@ -299,6 +347,32 @@
             text-align: center;
         }
 
+        /* Filtros para catálogo */
+        .catalog-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(17, 17, 17, 0.8);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient-primary);
+            color: var(--bg-dark);
+        }
+
         /* Cards para catálogo */
         .catalog-grid {
             display: grid;
@@ -315,7 +389,17 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(0, 240, 255, 0.1);
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
         }
+
+        .catalog-card:nth-child(1) { animation-delay: 0.1s; }
+        .catalog-card:nth-child(2) { animation-delay: 0.2s; }
+        .catalog-card:nth-child(3) { animation-delay: 0.3s; }
+        .catalog-card:nth-child(4) { animation-delay: 0.4s; }
+        .catalog-card:nth-child(5) { animation-delay: 0.5s; }
+        .catalog-card:nth-child(6) { animation-delay: 0.6s; }
 
         .catalog-card:hover {
             transform: translateY(-10px);
@@ -328,6 +412,7 @@
             height: 250px;
             object-fit: cover;
             transition: transform 0.3s ease;
+            background: rgba(127, 90, 240, 0.1);
         }
 
         .catalog-card:hover .catalog-card-image {
@@ -346,15 +431,52 @@
 
         .catalog-card p {
             color: var(--text-muted);
-            margin-bottom: 0;
+            margin-bottom: 15px;
         }
 
-        .catalog-card.no-image {
-            padding: 30px;
+        .catalog-card-content .price {
+            color: var(--accent-color);
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
-        .catalog-card.no-image .catalog-card-content {
-            padding: 0;
+        .catalog-card-content .talla {
+            font-size: 0.95em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+            background: rgba(0, 240, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .catalog-card-content .talla:hover {
+            transform: scale(1.05);
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .comprar-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comprar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
         }
 
         .placeholder-image {
@@ -391,7 +513,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 15px;
             border: 2px solid rgba(0, 240, 255, 0.2);
@@ -399,14 +522,28 @@
             background: rgba(0, 0, 0, 0.5);
             color: var(--text-light);
             font-size: 1em;
+            font-family: inherit;
             transition: all 0.3s ease;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .form-group.error input,
+        .form-group.error textarea,
+        .form-group.error select {
+            border-color: #ff4444;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 5px;
         }
 
         .submit-btn {
@@ -429,12 +566,46 @@
             box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Notificaciones */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 500;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+        }
+
+        .notification.success {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        .notification.error {
+            background: #ff4444;
+            color: white;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
         /* Redes sociales */
         .social-links {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 30px;
+            margin: 30px 0;
         }
 
         .social-links a {
@@ -457,18 +628,6 @@
             animation: none;
         }
 
-        /* Mensaje de éxito */
-        .success-message {
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: none;
-            text-align: center;
-        }
-
         /* Footer mejorado */
         footer {
             background: var(--bg-darker);
@@ -479,50 +638,6 @@
             position: relative;
         }
 
-        .catalog-card-content .price {
-    color: var(--accent-color);
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.Comprar-btn {
-    background: var(--gradient-secondary);
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 0.95em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-}
-
-.Comprar-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
-}
-.catalog-card-content .talla {
-    font-size: 0.95em;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    font-weight: 500;
-    background: rgba(0, 240, 255, 0.05);
-    padding: 8px 12px;
-    border-radius: 8px;
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
-    letter-spacing: 1px;
-    transition: transform 0.3s ease;
-}
-
-.catalog-card-content .talla:hover {
-    transform: scale(1.05);
-    background: rgba(0, 240, 255, 0.08);
-}
-
-
         footer::before {
             content: '';
             position: absolute;
@@ -531,52 +646,6 @@
             right: 0;
             height: 1px;
             background: var(--gradient-primary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .brand-text h1 {
-                font-size: 2.5em;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                gap: 20px;
-                padding: 15px;
-            }
-
-            .hero h2 {
-                font-size: 2.5em;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            section h2 {
-                font-size: 2em;
-            }
-
-            .social-links {
-                flex-wrap: wrap;
-            }
-        }
-
-        /* Efectos adicionales */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Botón scroll to top */
@@ -606,13 +675,167 @@
         .scroll-top:hover {
             transform: scale(1.1);
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .brand-text h1 {
+                font-size: 2.5em;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--bg-darker);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                gap: 0;
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+                animation: slideIn 0.3s ease;
+            }
+
+            .nav-menu li {
+                margin: 10px 0;
+            }
+
+            .nav-menu a {
+                font-size: 1em;
+                padding: 15px 20px;
+            }
+
+            .hero h2 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .catalog-filters {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .brand-text h1 {
+                font-size: 2em;
+            }
+
+            .catalog-card-content {
+                padding: 20px;
+            }
+        }
+
+        /* Efectos adicionales */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Preloader mejorado */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 240, 255, 0.1);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="spinner"></div>
+            <p>Cargando Cori's Store...</p>
+        </div>
+    </div>
+
     <!-- Encabezado con logo y texto -->
     <header>
         <div class="header-content">
-            <img src="Logo principal.jpg" alt="Logo Cori's P&K" class="logo" />
+            <img src="Logo principal.jpg" alt="Logo Cori's P&K - Ropa personalizada" class="logo" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="logo-placeholder" style="display: none;">CORI'S</div>
             <div class="brand-text">
                 <h1>Cori's P&K</h1>
                 <p>Tu estilo, nuestra visión</p>
@@ -620,186 +843,198 @@
         </div>
     </header>
 
-    <!-- Panel de navegación -->
+    <!-- Panel de navegación mejorado -->
     <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#personaliza">Personaliza</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
+        <div class="nav-container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#personaliza">Personaliza</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-content">
-            <h2>Bienvenido a Cori's Store</h2>
+            <h2 id="heroTitle">Bienvenido a Cori's Store</h2>
             <p>Diseños únicos y personalizados para gente única como tú. Explora nuestra colección y deja que tu ropa hable por ti.</p>
             <a href="#catalogo" class="cta-button">Explorar Catálogo</a>
         </div>
     </section>
 
     <!-- Sección CATÁLOGO -->
-<section id="catalogo" class="fade-in">
-  <h2>Catálogo</h2>
-  <p>Explora nuestras colecciones exclusivas diseñadas con pasión y creatividad.</p>
-  <div class="catalog-grid">
-
-    <!-- Camiseta 1 -->
-    <div class="catalog-card">
-      <img src="Camisa1.webp" alt="Camiseta motivacional para Gym" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>🏋️‍♂️Camiseta de Calacas Chidas 💪</h3>
-        <p>Diseñada para quienes rompen límites en el gimnasio. Estilo y confort en cada entrenamiento.</p><br>
-        <p class="talla">
-            <span>🧵 Talla:</span> S &nbsp;
-        </p>
-        <p class="price">$250 MXN</p> 
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- Camiseta 2 -->
-    <div class="catalog-card">
-      <img src="Camisa2.webp" alt="Camiseta edición limitada gym" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Edición Balenciaga 😎🤍</h3>
-        <p>Estampado Duradero y el mejor estilo para ti. Hecha para destacar.</p><br>
-        <p class="talla">
-            <span>🧵 Talla:</span> G &nbsp;
-        </p>
-        <p class="price">$250 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- Camiseta 3 -->
-    <div class="catalog-card">
-      <img src="Camisa3.webp" alt="Camiseta estilo urbano" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Camisa Porshe🔥</h3>
-        <p>Perfecta para combinar con tus jeans favoritos. Ligera, fresca y con actitud.</p><br>
-        <p class="talla">
-            <span>🧵 Talla:</span> M &nbsp;
-        </p>
-        <p class="price">$250 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- Camiseta 4 -->
-    <div class="catalog-card">
-      <img src="Camisa4.webp" alt="Camiseta diseño minimal" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>🔥 Camisa Junior H – Edición Streetwear 🔥</h3>
-        <p>Auténtica como su música, directa desde la calle a tu clóset.</p><br>
-        <p class="talla">
-            <span>🧵 Talla:</span> M &nbsp;
-        </p>
-        <p class="price">$250 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- CropTop 1 -->
-    <div class="catalog-card">
-      <img src="Croptop1.webp" alt="Crop top vibes" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Crop Vibes - Sabrina 🌸</h3>
-        <p>Súper cómodo, con corte moderno. Ideal para climas cálidos y buen estilo.</p> <br>
-        <p class="talla">
-            <span>🧵 Talla:</span> S &nbsp;
-        </p>
-        <p class="price">$280 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- CropTop 2 -->
-    <div class="catalog-card">
-      <img src="Croptop2.webp" alt="Crop top love" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Crop Top Love - My cherries and wine, rosemary and thyme💖</h3> <br>
-        <p>Un mensaje positivo y diseño cute para cualquier mood.</p>
-        <p class="talla">
-            <span>🧵 Talla:</span> M &nbsp;
-        </p>
-        <p class="price">$280 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- CropTop 3 -->
-    <div class="catalog-card">
-      <img src="Croptop3.webp" alt="Crop rebel" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>🏁 Camisa Max Verstappen – Edición Fórmula 1 🏁</h3>
-        <p>Para los fanáticos de la velocidad y la adrenalina, lleva la pasión de las pistas a tu estilo diario. </p> <br>
-        <p class="talla">
-            <span>🧵 Talla:</span> M &nbsp;
-        </p>
-        <p class="price">$280 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- ToteBag 1 -->
-    <div class="catalog-card">
-      <img src="Tote1.webp" alt="Tote bag ecológica" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Tote Eco - Good Vibes Only 🌿</h3>
-        <p>Bolsa ecológica con diseño aesthetic. Reutilizable y con onda.</p><br>
-        <p class="price">$170 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- ToteBag 2 -->
-    <div class="catalog-card">
-      <img src="Tote2.webp" alt="Tote bag ilustrada" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Tote mistica, resistente y única 🖌️</h3>
-        <p>Tote bag con arte exclusivo de Cori’s. Hecha para destacar.</p><br>
-        <p class="price">$170 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- ToteBag 3 -->
-    <div class="catalog-card">
-      <img src="Tote3.webp" alt="Tote bag personalizada" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Tote Summer 🌊</h3>
-        <p>Ideal para ir a playa con todo el estilo.</p><br>
-        <p class="price">$170 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)">Comprar</button>
-      </div>
-    </div>
-
-    <!-- ToteBag 4 -->
-    <div class="catalog-card">
-      <img src="Tote4.webp" alt="Tote edición limitada" class="catalog-card-image">
-      <div class="placeholder-image" style="display: none;"><span>Imagen próximamente</span></div>
-      <div class="catalog-card-content">
-        <h3>Tote Limited Edition 🍄</h3>
-        <p>Diseño único en existencia limitada. ¡No te quedes sin la tuya!</p> <br>
-        <p class="price">$170 MXN</p>
-        <button class="Comprar-btn" onclick="enviarWhatsapp(this)" >Comprar</button>
+    <section id="catalogo" class="fade-in">
+        <h2>Catálogo</h2>
+        <p>Explora nuestras colecciones exclusivas diseñadas con pasión y creatividad.</p>
+        
+        <!-- Filtros -->
+        <div class="catalog-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="camisetas">Camisetas</button>
+            <button class="filter-btn" data-filter="crops">Crop Tops</button>
+            <button class="filter-btn" data-filter="totes">Tote Bags</button>
         </div>
-    </div>
 
-  </div>
-</section>
+        <div class="catalog-grid">
+            <!-- Camiseta 1 -->
+            <div class="catalog-card" data-category="camisetas">
+                <img src="Camisa1.webp" alt="Camiseta motivacional para Gym con diseño de calaveras" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🏋️‍♂️ Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>🏋️‍♂️ Camiseta de Calacas Chidas 💪</h3>
+                    <p>Diseñada para quienes rompen límites en el gimnasio. Estilo y confort en cada entrenamiento.</p>
+                    <p class="talla"><span>🧵 Talla:</span> S</p>
+                    <p class="price">$250 MXN</p> 
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
 
+            <!-- Camiseta 2 -->
+            <div class="catalog-card" data-category="camisetas">
+                <img src="Camisa2.webp" alt="Camiseta edición Balenciaga estilo urbano" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>😎 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Edición Balenciaga 😎🤍</h3>
+                    <p>Estampado duradero y el mejor estilo para ti. Hecha para destacar.</p>
+                    <p class="talla"><span>🧵 Talla:</span> G</p>
+                    <p class="price">$250 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- Camiseta 3 -->
+            <div class="catalog-card" data-category="camisetas">
+                <img src="Camisa3.webp" alt="Camiseta Porsche estilo urbano" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🔥 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Camisa Porsche 🔥</h3>
+                    <p>Perfecta para combinar con tus jeans favoritos. Ligera, fresca y con actitud.</p>
+                    <p class="talla"><span>🧵 Talla:</span> M</p>
+                    <p class="price">$250 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- Camiseta 4 -->
+            <div class="catalog-card" data-category="camisetas">
+                <img src="Camisa4.webp" alt="Camiseta Junior H edición streetwear" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🔥 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>🔥 Camisa Junior H – Edición Streetwear 🔥</h3>
+                    <p>Auténtica como su música, directa desde la calle a tu clóset.</p>
+                    <p class="talla"><span>🧵 Talla:</span> M</p>
+                    <p class="price">$250 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- CropTop 1 -->
+            <div class="catalog-card" data-category="crops">
+                <img src="Croptop1.webp" alt="Crop top Sabrina con diseño moderno" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🌸 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Crop Vibes - Sabrina 🌸</h3>
+                    <p>Súper cómodo, con corte moderno. Ideal para climas cálidos y buen estilo.</p>
+                    <p class="talla"><span>🧵 Talla:</span> S</p>
+                    <p class="price">$280 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- CropTop 2 -->
+            <div class="catalog-card" data-category="crops">
+                <img src="Croptop2.webp" alt="Crop top Love con mensaje positivo" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>💖 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Crop Top Love - My cherries and wine, rosemary and thyme 💖</h3>
+                    <p>Un mensaje positivo y diseño cute para cualquier mood.</p>
+                    <p class="talla"><span>🧵 Talla:</span> M</p>
+                    <p class="price">$280 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- CropTop 3 -->
+            <div class="catalog-card" data-category="crops">
+                <img src="Croptop3.webp" alt="Camisa Max Verstappen Fórmula 1" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🏁 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>🏁 Camisa Max Verstappen – Edición Fórmula 1 🏁</h3>
+                    <p>Para los fanáticos de la velocidad y la adrenalina, lleva la pasión de las pistas a tu estilo diario.</p>
+                    <p class="talla"><span>🧵 Talla:</span> M</p>
+                    <p class="price">$280 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- ToteBag 1 -->
+            <div class="catalog-card" data-category="totes">
+                <img src="Tote1.webp" alt="Tote bag ecológica Good Vibes Only" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🌿 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Tote Eco - Good Vibes Only 🌿</h3>
+                    <p>Bolsa ecológica con diseño aesthetic. Reutilizable y con onda.</p>
+                    <p class="price">$170 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- ToteBag 2 -->
+            <div class="catalog-card" data-category="totes">
+                <img src="Tote2.webp" alt="Tote bag mística con arte exclusivo" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🖌️ Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Tote Mística, resistente y única 🖌️</h3>
+                    <p>Tote bag con arte exclusivo de Cori's. Hecha para destacar.</p>
+                    <p class="price">$170 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- ToteBag 3 -->
+            <div class="catalog-card" data-category="totes">
+                <img src="Tote3.webp" alt="Tote bag Summer ideal para playa" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🌊 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Tote Summer 🌊</h3>
+                    <p>Ideal para ir a playa con todo el estilo.</p>
+                    <p class="price">$170 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+
+            <!-- ToteBag 4 -->
+            <div class="catalog-card" data-category="totes">
+                <img src="Tote4.webp" alt="Tote bag edición limitada diseño único" class="catalog-card-image"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="placeholder-image" style="display: none;"><span>🍄 Imagen próximamente</span></div>
+                <div class="catalog-card-content">
+                    <h3>Tote Limited Edition 🍄</h3>
+                    <p>Diseño único en existencia limitada. ¡No te quedes sin la tuya!</p>
+                    <p class="price">$170 MXN</p>
+                    <button class="comprar-btn" onclick="enviarWhatsApp(this)">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Sección PERSONALIZA -->
     <section id="personaliza" class="fade-in">
@@ -822,32 +1057,30 @@
         <p>¿Listo para crear algo increíble? Contáctanos a través de nuestras redes sociales o llena el formulario.</p>
         
         <div class="social-links">
-            <a href="#" title="Instagram">📷</a>
-            <a href="#" title="Facebook">📘</a>
-            <a href="#" title="TikTok">🎵</a>
-            <a href="#" title="WhatsApp">💬</a>
+            <a href="https://instagram.com/coris_pk" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Síguenos en Instagram">📷</a>
+            <a href="https://facebook.com/coris_pk" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Síguenos en Facebook">📘</a>
+            <a href="https://tiktok.com/@coris_pk" target="_blank" rel="noopener noreferrer" title="TikTok" aria-label="Síguenos en TikTok">🎵</a>
+            <a href="https://wa.me/523123261757" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="Contáctanos por WhatsApp">💬</a>
         </div>
         
         <div class="form-container">
-            <div class="success-message" id="successMessage">
-                ¡Mensaje enviado exitosamente! Te contactaremos pronto.
-            </div>
             <form id="contactForm">
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" name="nombre" required aria-describedby="nombre-error">
                 </div>
                 <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required aria-describedby="email-error">
                 </div>
                 <div class="form-group">
                     <label for="telefono">Teléfono (opcional)</label>
-                    <input type="tel" id="telefono" name="telefono">
+                    <input type="tel" id="telefono" name="telefono" aria-describedby="telefono-error">
                 </div>
                 <div class="form-group">
                     <label for="tipo">Tipo de consulta</label>
-                    <select id="tipo" name="tipo" style="width: 100%; padding: 15px; border: 2px solid rgba(0, 240, 255, 0.2); border-radius: 10px; background: rgba(0, 0, 0, 0.5); color: var(--text-light); font-size: 1em;">
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecciona una opción</option>
                         <option value="personalizacion">Personalización</option>
                         <option value="catalogo">Consulta de catálogo</option>
                         <option value="precios">Precios</option>
@@ -855,10 +1088,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu idea..."></textarea>
+                    <label for="mensaje">Mensaje *</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Cuéntanos sobre tu idea..." aria-describedby="mensaje-error"></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
             </form>
         </div>
     </section>
@@ -869,675 +1102,577 @@
     </footer>
 
     <!-- Botón scroll to top -->
-    <button class="scroll-top" id="scrollTop">↑</button>
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
 
     <script>
-        // Smooth scrolling para navegación
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Animación fade-in al hacer scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+        // ===== CONFIGURACIÓN GLOBAL =====
+        const CONFIG = {
+            whatsappNumber: "523123261757",
+            animationDelay: 100,
+            notificationDuration: 3000
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+        // ===== UTILIDADES =====
+        const Utils = {
+            // Validación de email
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            },
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+            // Validación de teléfono
+            isValidPhone(phone) {
+                const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+                return phoneRegex.test(phone);
+            },
 
-        // Efecto de typing para el hero
-        const heroTitle = document.querySelector('.hero h2');
-        if (heroTitle) {
-            const text = heroTitle.textContent;
-            heroTitle.textContent = '';
-            let i = 0;
-            
-            setTimeout(() => {
-                const typeWriter = () => {
-                    if (i < text.length) {
-                        heroTitle.textContent += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 100);
-                    }
+            // Sanitizar texto para URL
+            sanitizeForURL(text) {
+                return encodeURIComponent(text);
+            },
+
+            // Debounce para optimizar eventos
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
                 };
-                typeWriter();
-            }, 1000);
-        }
-
-        // Manejo del formulario
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Mostrar mensaje de éxito
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
-            
-            // Limpiar formulario
-            this.reset();
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 5000);
-        });
-
-        // Botón scroll to top
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
             }
-        });
+        };
 
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // ===== SISTEMA DE NOTIFICACIONES =====
+        const NotificationSystem = {
+            show(message, type = 'success') {
+                // Remover notificaciones existentes
+                const existingNotifications = document.querySelectorAll('.notification');
+                existingNotifications.forEach(notification => notification.remove());
 
-        // Efecto parallax ligero
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Agregar interactividad a las cards del catálogo
-        document.querySelectorAll('.catalog-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Efecto de cursor personalizado
-        const cursor = document.createElement('div');
-        cursor.className = 'custom-cursor';
-        cursor.style.cssText = `
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            opacity: 0;
-        `;
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-            cursor.style.opacity = '0.7';
-        });
-
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '0.7';
-        });
-
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-        });
-
-        // Efecto de partículas en el hero
-        function createParticles() {
-            const hero = document.querySelector('.hero');
-            const particlesContainer = document.createElement('div');
-            particlesContainer.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 0;
-            `;
-            hero.appendChild(particlesContainer);
-
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: absolute;
-                    width: 2px;
-                    height: 2px;
-                    background: var(--primary-color);
-                    border-radius: 50%;
-                    opacity: 0.3;
-                    animation: float ${Math.random() * 6 + 4}s ease-in-out infinite;
-                `;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 2 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Ejecutar después de que la página se cargue
-        window.addEventListener('load', () => {
-            createParticles();
-        });
-
-        // Contador animado para estadísticas (opcional)
-        function animateCounter(element, target, duration) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            
-            const timer = setInterval(() => {
-                start += increment;
-                element.textContent = Math.floor(start);
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
                 
-                if (start >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                }
-            }, 16);
-        }
-
-        // Lazy loading para imágenes
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-
-        // Función para cambiar el tema (modo oscuro/claro)
-        function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('light-theme');
-            
-            const themeToggle = document.querySelector('.theme-toggle');
-            if (themeToggle) {
-                themeToggle.textContent = body.classList.contains('light-theme') ? '🌙' : '☀️';
+                document.body.appendChild(notification);
+                
+                // Mostrar notificación
+                requestAnimationFrame(() => {
+                    notification.classList.add('show');
+                });
+                
+                // Ocultar automáticamente
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                }, CONFIG.notificationDuration);
             }
-        }
+        };
 
-        // Validación avanzada del formulario
-        const formInputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
-        
-        formInputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                validateField(this);
-            });
-            
-            input.addEventListener('input', function() {
-                if (this.classList.contains('error')) {
-                    validateField(this);
+        // ===== NAVEGACIÓN =====
+        const Navigation = {
+            init() {
+                const hamburger = document.getElementById('hamburger');
+                const navMenu = document.getElementById('navMenu');
+                const navLinks = document.querySelectorAll('.nav-menu a');
+
+                // Toggle menú hamburguesa
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                // Cerrar menú al hacer click en un enlace
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+
+                // Smooth scrolling
+                navLinks.forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+
+                // Cerrar menú al hacer click fuera
+                document.addEventListener('click', (e) => {
+                    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        };
+
+        // ===== SISTEMA DE FILTROS =====
+        const FilterSystem = {
+            init() {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                const catalogCards = document.querySelectorAll('.catalog-card');
+
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Actualizar botones activos
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        const filter = btn.dataset.filter;
+                        
+                        // Filtrar productos
+                        catalogCards.forEach((card, index) => {
+                            const category = card.dataset.category;
+                            const shouldShow = filter === 'all' || category === filter;
+                            
+                            if (shouldShow) {
+                                card.style.display = 'block';
+                                card.style.animation = `fadeInUp 0.6s ease forwards`;
+                                card.style.animationDelay = `${index * 0.1}s`;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+        };
+
+        // ===== WHATSAPP INTEGRATION =====
+        const WhatsApp = {
+            // Enviar producto por WhatsApp
+            enviarProducto(button) {
+                try {
+                    const card = button.closest('.catalog-card');
+                    if (!card) throw new Error('No se encontró la información del producto');
+
+                    const productName = card.querySelector('h3')?.innerText || 'Producto';
+                    const price = card.querySelector('.price')?.innerText || 'Precio no disponible';
+                    const sizeElement = card.querySelector('.talla');
+                    const size = sizeElement ? sizeElement.innerText : 'Talla única';
+                    
+                    // Obtener imagen si existe
+                    const imageElement = card.querySelector('.catalog-card-image');
+                    const imageUrl = imageElement && imageElement.style.display !== 'none' 
+                        ? window.location.origin + '/' + imageElement.src.split('/').pop()
+                        : '';
+
+                    const message = this.createProductMessage(productName, price, size, imageUrl);
+                    this.openWhatsApp(message);
+                    
+                    NotificationSystem.show('¡Redirigiendo a WhatsApp!');
+                } catch (error) {
+                    console.error('Error al enviar producto:', error);
+                    NotificationSystem.show('Error al procesar el producto. Inténtalo de nuevo.', 'error');
                 }
-            });
-        });
+            },
 
-        function validateField(field) {
-            const value = field.value.trim();
-            const fieldType = field.type;
-            let isValid = true;
-            let errorMessage = '';
+            // Enviar formulario por WhatsApp
+            enviarFormulario(formData) {
+                try {
+                    const message = this.createFormMessage(formData);
+                    this.openWhatsApp(message);
+                    NotificationSystem.show('¡Formulario enviado! Redirigiendo a WhatsApp...');
+                } catch (error) {
+                    console.error('Error al enviar formulario:', error);
+                    NotificationSystem.show('Error al enviar formulario. Inténtalo de nuevo.', 'error');
+                }
+            },
 
-            // Remover mensajes de error anteriores
-            const existingError = field.parentNode.querySelector('.error-message');
-            if (existingError) {
-                existingError.remove();
+            // Crear mensaje de producto
+            createProductMessage(name, price, size, imageUrl) {
+                let message = `¡Hola! Estoy interesado en comprar este producto:\n\n`;
+                message += `*${name}*\n\n`;
+                message += `💰 ${price}\n`;
+                message += `📏 ${size}\n\n`;
+                
+                if (imageUrl) {
+                    message += `📸 Imagen de referencia: ${imageUrl}\n\n`;
+                }
+                
+                message += `¿Podrías darme más información sobre disponibilidad y formas de pago?`;
+                
+                return message;
+            },
+
+            // Crear mensaje de formulario
+            createFormMessage(formData) {
+                let message = `¡Hola! Nueva consulta desde el sitio web:\n\n`;
+                message += `👤 *Nombre:* ${formData.nombre}\n`;
+                message += `📧 *Email:* ${formData.email}\n`;
+                
+                if (formData.telefono) {
+                    message += `📱 *Teléfono:* ${formData.telefono}\n`;
+                }
+                
+                message += `📋 *Tipo de consulta:* ${formData.tipo}\n\n`;
+                message += `💬 *Mensaje:*\n${formData.mensaje}`;
+                
+                return message;
+            },
+
+            // Abrir WhatsApp
+            openWhatsApp(message) {
+                const encodedMessage = Utils.sanitizeForURL(message);
+                const whatsappUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedMessage}`;
+                window.open(whatsappUrl, '_blank');
             }
+        };
 
-            if (field.hasAttribute('required') && value === '') {
-                isValid = false;
-                errorMessage = 'Este campo es obligatorio';
-            } else if (fieldType === 'email' && value !== '' && !isValidEmail(value)) {
-                isValid = false;
-                errorMessage = 'Por favor ingresa un email válido';
-            } else if (fieldType === 'tel' && value !== '' && !isValidPhone(value)) {
-                isValid = false;
-                errorMessage = 'Por favor ingresa un teléfono válido';
-            }
+        // ===== VALIDACIÓN DE FORMULARIOS =====
+        const FormValidator = {
+            validateField(field) {
+                const value = field.value.trim();
+                const fieldType = field.type;
+                const fieldName = field.name;
+                let isValid = true;
+                let errorMessage = '';
 
-            if (!isValid) {
-                field.classList.add('error');
+                // Limpiar errores anteriores
+                this.clearError(field);
+
+                // Validaciones
+                if (field.hasAttribute('required') && value === '') {
+                    isValid = false;
+                    errorMessage = 'Este campo es obligatorio';
+                } else if (fieldType === 'email' && value !== '' && !Utils.isValidEmail(value)) {
+                    isValid = false;
+                    errorMessage = 'Por favor ingresa un email válido';
+                } else if (fieldType === 'tel' && value !== '' && !Utils.isValidPhone(value)) {
+                    isValid = false;
+                    errorMessage = 'Por favor ingresa un teléfono válido (mínimo 10 dígitos)';
+                } else if (fieldName === 'nombre' && value !== '' && value.length < 2) {
+                    isValid = false;
+                    errorMessage = 'El nombre debe tener al menos 2 caracteres';
+                } else if (fieldName === 'mensaje' && value !== '' && value.length < 10) {
+                    isValid = false;
+                    errorMessage = 'El mensaje debe tener al menos 10 caracteres';
+                }
+
+                if (!isValid) {
+                    this.showError(field, errorMessage);
+                } else {
+                    this.showSuccess(field);
+                }
+
+                return isValid;
+            },
+
+            showError(field, message) {
                 field.style.borderColor = '#ff4444';
+                const formGroup = field.closest('.form-group');
+                formGroup.classList.add('error');
                 
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'error-message';
-                errorDiv.textContent = errorMessage;
-                errorDiv.style.cssText = `
-                    color: #ff4444;
-                    font-size: 0.9em;
-                    margin-top: 5px;
-                `;
-                field.parentNode.appendChild(errorDiv);
-            } else {
-                field.classList.remove('error');
+                errorDiv.textContent = message;
+                formGroup.appendChild(errorDiv);
+            },
+
+            clearError(field) {
                 field.style.borderColor = 'rgba(0, 240, 255, 0.2)';
-            }
-
-            return isValid;
-        }
-
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        function isValidPhone(phone) {
-            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-            return phoneRegex.test(phone);
-        }
-
-        // Efecto de escritura automática para diferentes textos
-        const texts = [
-            "Bienvenido a Cori's Store",
-            "Tu estilo, nuestra pasión",
-            "Diseños únicos para ti",
-            "Expresa tu personalidad"
-        ];
-        
-        let currentTextIndex = 0;
-        let currentCharIndex = 0;
-        let isDeleting = false;
-        
-        function typeWriter() {
-            const heroTitle = document.querySelector('.hero h2');
-            if (!heroTitle) return;
-            
-            const currentText = texts[currentTextIndex];
-            
-            if (isDeleting) {
-                heroTitle.textContent = currentText.substring(0, currentCharIndex - 1);
-                currentCharIndex--;
-            } else {
-                heroTitle.textContent = currentText.substring(0, currentCharIndex + 1);
-                currentCharIndex++;
-            }
-            
-            let typeSpeed = isDeleting ? 50 : 100;
-            
-            if (!isDeleting && currentCharIndex === currentText.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && currentCharIndex === 0) {
-                isDeleting = false;
-                currentTextIndex = (currentTextIndex + 1) % texts.length;
-                typeSpeed = 500;
-            }
-            
-            setTimeout(typeWriter, typeSpeed);
-        }
-
-        // Iniciar el efecto de escritura después de 2 segundos
-        setTimeout(() => {
-            const heroTitle = document.querySelector('.hero h2');
-            if (heroTitle) {
-                heroTitle.textContent = '';
-                typeWriter();
-            }
-        }, 2000);
-
-        // Función para mostrar notificaciones
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 25px;
-                background: ${type === 'success' ? 'var(--primary-color)' : '#ff4444'};
-                color: var(--bg-dark);
-                border-radius: 10px;
-                font-weight: 500;
-                z-index: 10000;
-                transform: translateX(400px);
-                transition: transform 0.3s ease;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 3000);
-        }
-
-        // Actualizar el manejo del formulario para usar notificaciones
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validar todos los campos
-            const formInputs = this.querySelectorAll('input[required], textarea[required]');
-            let isFormValid = true;
-            
-            formInputs.forEach(input => {
-                if (!validateField(input)) {
-                    isFormValid = false;
+                const formGroup = field.closest('.form-group');
+                formGroup.classList.remove('error');
+                
+                const existingError = formGroup.querySelector('.error-message');
+                if (existingError) {
+                    existingError.remove();
                 }
-            });
-            
-            if (!isFormValid) {
-                showNotification('Por favor corrige los errores en el formulario', 'error');
-                return;
-            }
-            
-            // Simular envío del formulario
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                showNotification('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
-                this.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
-        });
+            },
 
-        // Efecto de reveal en scroll
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('.catalog-card, .form-container');
-            
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveal.getBoundingClientRect().top;
-                const elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('visible');
-                }
-            });
-        }
-        window.addEventListener('scroll', revealOnScroll);
-        // Preloader
-        function showPreloader() {
-            const preloader = document.createElement('div');
-            preloader.id = 'preloader';
-            preloader.innerHTML = `
-                <div class="preloader-content">
-                    <div class="spinner"></div>
-                    <p>Cargando Cori's Store...</p>
-                </div>
-            `;
-            preloader.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--bg-dark);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10000;
-                transition: opacity 0.5s ease;
-            `;
-            const style = document.createElement('style');
-            style.textContent = `
-                .preloader-content {
-                    text-align: center;
-                    color: var(--text-light);
-                }
-                .spinner {
-                    width: 50px;
-                    height: 50px;
-                    border: 3px solid rgba(0, 240, 255, 0.1);
-                    border-top: 3px solid var(--primary-color);
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin: 0 auto 20px;
-                }
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(style);
-            document.body.appendChild(preloader);
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
+            showSuccess(field) {
+                field.style.borderColor = 'var(--primary-color)';
+                const formGroup = field.closest('.form-group');
+                formGroup.classList.remove('error');
+            },
+
+            validateForm(form) {
+                const fields = form.querySelectorAll('input[required], textarea[required], select[required]');
+                let isValid = true;
+
+                fields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
+        };
+
+        // ===== MANEJO DE FORMULARIOS =====
+        const FormHandler = {
+            init() {
+                const contactForm = document.getElementById('contactForm');
+                const submitBtn = document.getElementById('submitBtn');
+                
+                // Validación en tiempo real
+                const formFields = contactForm.querySelectorAll('input, textarea, select');
+                formFields.forEach(field => {
+                    field.addEventListener('blur', () => {
+                        FormValidator.validateField(field);
+                    });
+                    
+                    field.addEventListener('input', Utils.debounce(() => {
+                        if (field.closest('.form-group').classList.contains('error')) {
+                            FormValidator.validateField(field);
+                        }
+                    }, 300));
+                });
+
+                // Envío del formulario
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    if (!FormValidator.validateForm(contactForm)) {
+                        NotificationSystem.show('Por favor corrige los errores en el formulario', 'error');
+                        return;
+                    }
+
+                    // Deshabilitar botón y mostrar loading
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Enviando...';
+                    submitBtn.disabled = true;
+
+                    // Recopilar datos del formulario
+                    const formData = {
+                        nombre: document.getElementById('nombre').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        telefono: document.getElementById('telefono').value.trim(),
+                        tipo: document.getElementById('tipo').value,
+                        mensaje: document.getElementById('mensaje').value.trim()
+                    };
+
+                    // Simular envío (en producción aquí irían las validaciones del servidor)
                     setTimeout(() => {
-                        preloader.remove();
-                    }, 500);
-                }, 1000);
-            });
-        }
-        // Mostrar preloader solo en la primera carga
-        if (document.readyState === 'loading') {
-            showPreloader();
-        }
-        console.log('🎨 Cori\'s P&K - Sitio web cargado exitosamente!');
-          // Función para enviar mensaje por WhatsApp
-        function enviarWhatsapp(button) {
-            // Obtener los detalles del producto
-            const card = button.closest('.catalog-card');
-            const productName = card.querySelector('h3').innerText;
-            const price = card.querySelector('.price').innerText;
-            const sizeElement = card.querySelector('.talla');
-            const size = sizeElement ? sizeElement.innerText : 'Talla única';
-            const image = card.querySelector('.catalog-card-image').src;
+                        WhatsApp.enviarFormulario(formData);
+                        contactForm.reset();
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Limpiar estilos de validación
+                        formFields.forEach(field => {
+                            FormValidator.clearError(field);
+                        });
+                    }, 1000);
+                });
+            }
+        };
 
-            // Crear mensaje con formato
-            const message = `¡Hola! Estoy interesado en comprar este producto:\n\n${productName}\n\n${price}\n${size}\n\nAquí está la imagen de referencia:\n${image}`;
-            // Codificar el mensaje para URL
-            const encodedMessage = encodeURIComponent(message);
-            // Número de teléfono (reemplaza con tu número)
-            const phoneNumber = "523123261757"; // Ejemplo: cambia por tu número con código de país
-            // Crear enlace de WhatsApp
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            // Abrir enlace en nueva pestaña
-            window.open(whatsappUrl, '_blank');
-            // Función para enviar formulario a WhatsApp
-        function enviarFormularioWhatsApp(event) {
-            event.preventDefault();
-            
-            // Obtener valores del formulario
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const tipo = document.getElementById('tipo').value;
-            const mensaje = document.getElementById('mensaje').value;
-            
-            // Validar campos requeridos
-            if (!nombre || !email || !mensaje) {
-                showNotification('Por favor completa los campos obligatorios', 'error');
-                return;
-            }
-            
-            // Validar email
-            if (!isValidEmail(email)) {
-                showNotification('Por favor ingresa un email válido', 'error');
-                return;
-            }
-            
-            // Construir mensaje para WhatsApp
-            let whatsappMessage = `¡Hola! Recibí una nueva consulta a través del formulario:\n\n`;
-            whatsappMessage += `*Nombre:* ${nombre}\n`;
-            whatsappMessage += `*Email:* ${email}\n`;
-            if (telefono) {
-                whatsappMessage += `*Teléfono:* ${telefono}\n`;
-            }
-            whatsappMessage += `*Tipo de consulta:* ${tipo}\n`;
-            whatsappMessage += `*Mensaje:*\n${mensaje}`;
-            
-            // Codificar el mensaje
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Número de WhatsApp (reemplaza con el número real)
-            const phoneNumber = "523123261757"; // Ejemplo: número con código de país
-            
-            // Crear enlace de WhatsApp
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            // Abrir enlace en nueva pestaña
-            window.open(whatsappUrl, '_blank');
-            
-            // Mostrar mensaje de éxito
-            document.getElementById('whatsappSuccess').style.display = 'block';
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                document.getElementById('whatsappSuccess').style.display = 'none';
-            }, 5000);
-            
-            // Limpiar formulario
-            document.getElementById('contactForm').reset();
-        }
-        
-        // Función para comprar un producto
-        function comprarProducto(button) {
-            // Obtener los detalles del producto
-            const card = button.closest('.catalog-card');
-            const productName = card.querySelector('h3').innerText;
-            const price = card.querySelector('.price').innerText;
-            const sizeElement = card.querySelector('.talla');
-            const size = sizeElement ? sizeElement.innerText : 'Talla única';
-            const image = card.querySelector('.catalog-card-image').src;
-            
-            // Crear mensaje con formato
-            const message = `¡Hola! Estoy interesado en comprar este producto:\n\n*${productName}*\n\n${price}\n${size}\n\nAquí está la imagen de referencia:\n${image}`;
-            
-            // Codificar el mensaje para URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // Número de WhatsApp
-            const phoneNumber = "523123261757";
-            
-            // Crear enlace de WhatsApp
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-            
-            // Abrir enlace en nueva pestaña
-            window.open(whatsappUrl, '_blank');
-        }
-        
-        // Función para validar email
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-        
-        // Función para mostrar notificaciones
-        function showNotification(message, type = 'success') {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 25px;
-                background: ${type === 'success' ? 'var(--primary-color)' : '#ff4444'};
-                color: var(--bg-dark);
-                border-radius: 10px;
-                font-weight: 500;
-                z-index: 10000;
-                transform: translateX(400px);
-                transition: transform 0.3s ease;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-            }, 100);
-            
-            setTimeout(() => {
-                notification.style.transform = 'translateX(400px)';
+        // ===== ANIMACIONES Y EFECTOS =====
+        const AnimationSystem = {
+            init() {
+                this.initScrollAnimations();
+                this.initScrollToTop();
+                this.initHeroTypewriter();
+                this.initPreloader();
+            },
+
+            initScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+            },
+
+            initScrollToTop() {
+                const scrollTopBtn = document.getElementById('scrollTop');
+                
+                window.addEventListener('scroll', Utils.debounce(() => {
+                    if (window.pageYOffset > 300) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
+                }, 100));
+
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            },
+
+            initHeroTypewriter() {
+                const texts = [
+                    "Bienvenido a Cori's Store",
+                    "Tu estilo, nuestra pasión",
+                    "Diseños únicos para ti",
+                    "Expresa tu personalidad"
+                ];
+                
+                let currentTextIndex = 0;
+                let currentCharIndex = 0;
+                let isDeleting = false;
+                
+                const typeWriter = () => {
+                    const heroTitle = document.getElementById('heroTitle');
+                    if (!heroTitle) return;
+                    
+                    const currentText = texts[currentTextIndex];
+                    
+                    if (isDeleting) {
+                        heroTitle.textContent = currentText.substring(0, currentCharIndex - 1);
+                        currentCharIndex--;
+                    } else {
+                        heroTitle.textContent = currentText.substring(0, currentCharIndex + 1);
+                        currentCharIndex++;
+                    }
+                    
+                    let typeSpeed = isDeleting ? 50 : 100;
+                    
+                    if (!isDeleting && currentCharIndex === currentText.length) {
+                        typeSpeed = 2000;
+                        isDeleting = true;
+                    } else if (isDeleting && currentCharIndex === 0) {
+                        isDeleting = false;
+                        currentTextIndex = (currentTextIndex + 1) % texts.length;
+                        typeSpeed = 500;
+                    }
+                    
+                    setTimeout(typeWriter, typeSpeed);
+                };
+
+                // Iniciar después de 2 segundos
                 setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 3000);
-        }
-        
-        // Asignar evento al formulario
-        document.getElementById('contactForm').addEventListener('submit', enviarFormularioWhatsApp);
-        
-        // Resto del código existente...
-        // Smooth scrolling para navegación
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                    const heroTitle = document.getElementById('heroTitle');
+                    if (heroTitle) {
+                        heroTitle.textContent = '';
+                        typeWriter();
+                    }
+                }, 2000);
+            },
+
+            initPreloader() {
+                const preloader = document.getElementById('preloader');
+                
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }, 1000);
+                });
+
+                // Fallback: ocultar preloader después de 3 segundos máximo
+                setTimeout(() => {
+                    if (preloader.style.display !== 'none') {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }
+                }, 3000);
+            }
+        };
+
+        // ===== FUNCIONES GLOBALES =====
+        // Función global para los botones de compra (necesaria para onclick en HTML)
+        window.enviarWhatsApp = function(button) {
+            WhatsApp.enviarProducto(button);
+        };
+
+        // ===== INICIALIZACIÓN =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar todos los sistemas
+            Navigation.init();
+            FilterSystem.init();
+            FormHandler.init();
+            AnimationSystem.init();
+
+            // Efectos adicionales para las cards del catálogo
+            document.querySelectorAll('.catalog-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
                 });
             });
-        });
-        
-        // Animación fade-in al hacer scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+
+            // Efecto parallax ligero para el hero
+            let ticking = false;
+            
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    const speed = 0.5;
+                    hero.style.transform = `translateY(${scrolled * speed}px)`;
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
                 }
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+
+            console.log('🎨 Cori\'s P&K - Sitio web cargado exitosamente!');
         });
-        
-        // Botón scroll to top
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
+
+        // ===== MANEJO DE ERRORES GLOBALES =====
+        window.addEventListener('error', function(event) {
+            console.error('Error en el sitio:', event.error);
+            // En producción, aquí podrías enviar el error a un servicio de monitoreo
         });
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+
+        // ===== OPTIMIZACIONES DE RENDIMIENTO =====
+        // Lazy loading para imágenes (si decides implementarlo)
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            observer.unobserve(img);
+                        }
+                    }
+                });
             });
-        });
+
+            // Observar imágenes con data-src (para implementación futura)
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Service Worker para cache (opcional, para implementación futura)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // navigator.serviceWorker.register('/sw.js')
+                //     .then(registration => console.log('SW registrado'))
+                //     .catch(error => console.log('SW falló'));
+            });
         }
     </script>
 </body>
